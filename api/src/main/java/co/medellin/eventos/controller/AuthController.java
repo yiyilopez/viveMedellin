@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -67,5 +69,9 @@ public class AuthController {
     String accessToken = jwtService.generateToken(user);
     UserSummary userSummary = new UserSummary(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getRole());
     return ResponseEntity.ok(new AuthResponse(accessToken, request.getRefreshToken(), userSummary));
+    }
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<User>> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 }
