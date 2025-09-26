@@ -41,21 +41,27 @@ public class EventController {
 
     @GetMapping("/{id}")
     public ResponseEntity<EventDto> getEvent(@PathVariable Long id) {
-        return eventService.findById(id)
-                .map(event -> new EventDto(
-                        event.getId(),
-                        event.getTitle(),
-                        event.getDescription(),
-                        event.getStartsAt(),
-                        event.getEndsAt(),
-                        event.getLocationText(),
-                        event.getImageUrl(),
-                        event.getCreatedBy() != null ? event.getCreatedBy().getId() : null,
-                        event.getIsActive(),
-                        event.getCreatedAt(),
-                        event.getUpdatedAt()
-                ))
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(eventService.findById(id));
+    }
+
+    @PostMapping("/save")
+    public Event saveEvent(@RequestBody EventDto eventDto) {
+        return eventService.saveEvent(eventDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<EventDto> update(@RequestBody EventDto dto) {
+        return ResponseEntity.ok(eventService.updateEvent(dto));
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<EventDto>> getByUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(eventService.getEventsByUser(userId));
     }
 }
