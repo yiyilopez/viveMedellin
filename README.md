@@ -222,10 +222,10 @@ classDiagram
     }
 
     %% Relaciones actuales
-    User ||--o{ Event : creates
-    Event ||--o{ Comment : has
-    User ||--o{ Comment : writes
-    Comment ||--o{ Comment : replies_to
+    User ||--o{ Event
+    Event ||--o{ Comment
+    User ||--o{ Comment
+    Comment ||--o{ Comment
 
     UserService --> UserRepository
     EventService --> EventRepository
@@ -351,12 +351,12 @@ classDiagram
     }
 
     %% Relaciones planificadas
-    User ||--o{ UserFollow : follower
-    User ||--o{ UserFollow : followed
-    User ||--o{ EventSaved : saves
-    Event ||--o{ EventSaved : saved_by
-    User ||--o{ Notification : receives
-    Comment ||--o{ CommentNotification : triggers
+    User ||--o{ UserFollow
+    User ||--o{ UserFollow
+    User ||--o{ EventSaved
+    Event ||--o{ EventSaved
+    User ||--o{ Notification
+    Comment ||--o{ CommentNotification
 ```
 
 #### Consideraciones de Seguridad y Accesibilidad
