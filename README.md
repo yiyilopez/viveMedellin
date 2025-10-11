@@ -221,11 +221,11 @@ classDiagram
         +deleteComment(Long)
     }
 
-    %% Relaciones actuales
-    User ||--|| Event : creates
-    Event ||--|| Comment : has
-    User ||--|| Comment : writes
-    Comment ||--|| Comment : replies_to
+    %% Relaciones actuales (simplificadas para compatibilidad Mermaid)
+    User --> Event
+    Event --> Comment
+    User --> Comment
+    Comment --> Comment
 
     UserService --> UserRepository
     EventService --> EventRepository
@@ -350,13 +350,13 @@ classDiagram
         +getSocialActivityDashboard() SocialActivitySummaryDto
     }
 
-    %% Relaciones planificadas
-    User ||--|| UserFollow : follower
-    User ||--|| UserFollow : followed
-    User ||--|| EventSaved : saves
-    Event ||--|| EventSaved : saved_by
-    User ||--|| Notification : receives
-    Comment ||--|| CommentNotification : triggers
+    %% Relaciones planificadas (simplificadas para compatibilidad Mermaid)
+    User --> UserFollow
+    User --> UserFollow
+    User --> EventSaved
+    Event --> EventSaved
+    User --> Notification
+    Comment --> CommentNotification
 ```
 
 #### Consideraciones de Seguridad y Accesibilidad
