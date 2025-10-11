@@ -609,9 +609,9 @@ graph TD
 
 | Aspecto | Monolito Actual | Estado |
 |---------|-----------------|--------|
-| **Deployment** | Una sola unidad desplegable (JAR) | ✅ Implementado |
-| **Base de Datos** | Una sola instancia PostgreSQL | ✅ Implementado |
-| **Comunicación** | Llamadas de métodos internos | ✅ Implementado |
-| **Tecnología** | Stack unificado (Spring Boot) | ✅ Implementado |
-| **Escalabilidad** | Vertical (más recursos al servidor) | ✅ Actual |
-| **Desarrollo** | Equipo trabajando en misma base código | ✅ Actual |
+| **Deployment** | Una sola unidad desplegable (JAR) |  Implementado |
+| **Base de Datos** | Una sola instancia PostgreSQL |  Implementado |
+| **Comunicación** | Llamadas de métodos internos |  Implementado |
+| **Tecnología** | Stack unificado (Spring Boot) |  Implementado |
+| **Escalabilidad** | Vertical (más recursos al servidor) |  Actual |
+| **Desarrollo** | Equipo trabajando en misma base código |  Actual |
