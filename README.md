@@ -184,7 +184,7 @@ classDiagram
         +getEvents() List~Event~
         +getEventById(Long) Event
         +updateEvent(Long, EventDto) Event
-        +deleteEvent(Long) void
+        +deleteEvent(Long)
     }
 
     class CommentService {
@@ -192,7 +192,7 @@ classDiagram
         +getCommentsByEvent(Long) List~CommentDto~
         +createComment(CommentDto) CommentDto
         +updateComment(Long, CommentDto) CommentDto
-        +deleteComment(Long) void
+        +deleteComment(Long)
     }
 
     %% === CONTROLADORES ACTUALES ===
@@ -210,7 +210,7 @@ classDiagram
         +getEvents() List~EventDto~
         +getEvent(Long) EventDto
         +updateEvent(Long, EventDto) EventDto
-        +deleteEvent(Long) void
+        +deleteEvent(Long)
     }
 
     class CommentController {
@@ -218,14 +218,14 @@ classDiagram
         +getCommentsByEvent(Long) List~CommentDto~
         +createComment(CommentDto) CommentDto
         +updateComment(Long, CommentDto) CommentDto
-        +deleteComment(Long) void
+        +deleteComment(Long)
     }
 
     %% Relaciones actuales
-    User ||--o{ Event
-    Event ||--o{ Comment
-    User ||--o{ Comment
-    Comment ||--o{ Comment
+    User ||--|| Event : creates
+    Event ||--|| Comment : has
+    User ||--|| Comment : writes
+    Comment ||--|| Comment : replies_to
 
     UserService --> UserRepository
     EventService --> EventRepository
@@ -286,7 +286,7 @@ classDiagram
         -NotificationType type
         -boolean isRead
         -LocalDateTime createdAt
-        +markAsRead() void
+        +markAsRead()
     }
 
     class CommentNotification {
@@ -306,7 +306,7 @@ classDiagram
     %% === INTERFACES (PRINCIPIOS SOLID) ===
     class INotificationService {
         <<interface>>
-        +sendNotification(Notification) void
+        +sendNotification(Notification)
         +getUnreadNotifications(User) List~Notification~
     }
 
@@ -326,8 +326,8 @@ classDiagram
 
     %% === SERVICIOS EXTENDIDOS ===
     class NotificationService {
-        +createCommentNotification(Comment, User) void
-        +sendNotificationToEventSavers(Event, Comment) void
+        +createCommentNotification(Comment, User)
+        +sendNotificationToEventSavers(Event, Comment)
         +getUnreadNotifications(User) List~Notification~
     }
 
@@ -351,12 +351,12 @@ classDiagram
     }
 
     %% Relaciones planificadas
-    User ||--o{ UserFollow
-    User ||--o{ UserFollow
-    User ||--o{ EventSaved
-    Event ||--o{ EventSaved
-    User ||--o{ Notification
-    Comment ||--o{ CommentNotification
+    User ||--|| UserFollow : follower
+    User ||--|| UserFollow : followed
+    User ||--|| EventSaved : saves
+    Event ||--|| EventSaved : saved_by
+    User ||--|| Notification : receives
+    Comment ||--|| CommentNotification : triggers
 ```
 
 #### Consideraciones de Seguridad y Accesibilidad
